@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Employee
+{
+    public:
+        int number;
+        char name[80];
+        int salary;
+
+        void showData();
+
+        Employee();
+        Employee( int nu, const char *na, int sa );
+};
+
+
+void Employee::showData()
+{
+    cout << number << "\n";
+    cout << name << "\n";
+    cout << salary << "\n";
+}
+
+
+Employee::Employee()
+{
+    number = 0;
+    strcpy( name, "–¢Ý’è" );
+    salary = 1500000;
+
+}
+
+Employee::Employee( int nu, const char *na, int sa )
+{
+    number = nu;
+    strcpy( name, na );
+    salary = sa;
+}
+
+
+int main()
+{
+    Employee someone;
+
+    someone.showData();
+
+
+    Employee tanaka( 1234, "“c’†ˆê˜Y", 2000000 );
+
+    tanaka.showData();
+
+    return 0;
+}
