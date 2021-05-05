@@ -20,7 +20,7 @@ class Director : public Employee
         void showData();
         
         Director();
-        Director( int nu, char *na, int sa, int st );
+        Director( int nu, const char *na, int sa, int st );
 };
 
 
