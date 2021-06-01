@@ -121,3 +121,96 @@ bool Board::setCell( Player *player )
         return false;
     }
 }
+
+bool Board::judge( Player *player )
+{
+    char mark = player->getMark();
+
+    if( cell[0][0] == mark && cell[0][1] == mark && cell[0][2] == mark
+     || cell[1][0] == mark && cell[1][1] == mark && cell[1][2] == mark
+     || cell[2][0] == mark && cell[2][1] == mark && cell[2][2] == mark
+     || cell[0][0] == mark && cell[1][0] == mark && cell[2][0] == mark
+     || cell[0][1] == mark && cell[1][1] == mark && cell[2][1] == mark
+     || cell[0][2] == mark && cell[1][2] == mark && cell[2][2] == mark
+     || cell[0][0] == mark && cell[1][1] == mark && cell[2][2] == mark
+     || cell[2][0] == mark && cell[1][1] == mark && cell[0][2] == mark )
+     {
+         cout << "\n ƒQ[ƒ€‚¨‚í‚èF" << mark << "‚ÌŸ‚¿‚¾‚æ\n";
+
+         return true;
+     }
+
+    bool draw = true;
+
+    for( int v = 0; v < 3 && draw; v++ )
+    {
+        for( int h = 0; h < 3 && draw; h++ )
+        {
+            if( cell[v][h] >= '1' && cell[v][h] >= '9' )
+            {
+                draw = false;
+            }
+        }
+    }
+
+    if( draw )
+    {
+        cout << "\n ƒQ[ƒ€‚¨‚í‚èF" << "ˆø‚«•ª‚¯‚¾‚æ\n";
+
+        return true;
+    }
+
+    return false;
+}
+
+Board::Board()
+{
+    for( int v = 0; v < 3; v++ )
+    {
+        for( int h = 0; h < 3; h++ )
+        {
+            cell[v][h] = ( v * 3 + h + 1) + '0';
+        }
+    }
+}
+
+int main()
+{
+    Player *player[2];
+    User user( 'o' );
+    Computer computer( 'x' );
+    Player[0] = &computer;
+    player[1] = &user;
+    Board board;
+    int turn = 0;
+
+    srand( time( NULL ));
+
+    while( true )
+    {
+        board.show();
+
+        do
+        {
+            player[ turn ]->select();
+        } while ( board.setCell( player[ turn ]) == false );
+
+        if( board.judge( player[ turn ]))
+        {
+            break;
+        }
+
+        if( turn == 0 )
+        {
+            turn = 1;
+        }
+        else
+        {
+            turn = 0;
+        }
+    }
+
+    board.show();
+
+    return 0;
+}
