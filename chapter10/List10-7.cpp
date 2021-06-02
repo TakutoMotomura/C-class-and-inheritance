@@ -146,7 +146,7 @@ bool Board::judge( Player *player )
     {
         for( int h = 0; h < 3 && draw; h++ )
         {
-            if( cell[v][h] >= '1' && cell[v][h] >= '9' )
+            if( cell[v][h] >= '1' && cell[v][h] <= '9' )
             {
                 draw = false;
             }
@@ -179,7 +179,7 @@ int main()
     Player *player[2];
     User user( 'o' );
     Computer computer( 'x' );
-    Player[0] = &computer;
+    player[0] = &computer;
     player[1] = &user;
     Board board;
     int turn = 0;
