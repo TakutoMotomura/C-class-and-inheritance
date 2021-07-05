@@ -69,3 +69,50 @@ void Choki::vsPa()
 {
     cout << "ちょきのかち\n";
 }
+
+class Pa:public Hand
+{
+    public:
+        void judge( Hand *h );
+        void vsGu();
+        void vsChoki();
+        void vsPa();
+};
+
+void Pa::judge( Hand *h )
+{
+    h->vsPa();
+}
+
+void Pa::vsGu()
+{
+    cout << "ぱーのかち\n";
+}
+
+void Pa::vsChoki()
+{
+    cout << "ぱーのまけ\n";
+}
+
+void Pa::vsPa()
+{
+    cout << "あいこ\n";
+}
+
+int main()
+{
+    Gu      g;
+    Choki   c;
+    Pa      p;
+
+    cout << "ぐー vs ちょき ・・・";
+    c.judge( &g );
+
+    cout << "ぐー vs ぱー ・・・";
+    p.judge( &g );
+
+    cout << "ぐー vs ぐー ・・・";
+    g.judge( &g );
+
+    return 0;
+}
