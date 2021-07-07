@@ -100,3 +100,59 @@ void Board::show()
 
     cout << "+-+-+-+\n";
 }
+
+bool Board::setCell( Player *player )
+{
+    int number = player->getNumber();
+    int v = ( number -1 ) / 3;
+    int h = ( number -1 ) % 3;
+
+    if( cell[v][h] >= '1' && cell[v][h] <= '9' )
+    {
+        cell[v][h] = player->getMark();
+        return true;
+    }
+    else
+    {
+        cout << "そこは書き込めないよ\n";
+        return false;
+    }
+}
+
+bool Board::judge( Player *player )
+{
+    char mark = player->getMark();
+
+    if( cell[0][0] == mark && cell[0][1] == mark && cell[0][2] == mark
+    ||  cell[1][0] == mark && cell[1][1] == mark && cell[1][2] == mark
+    ||  cell[2][0] == mark && cell[2][1] == mark && cell[2][2] == mark
+    ||  cell[0][0] == mark && cell[1][0] == mark && cell[2][0] == mark
+    ||  cell[0][1] == mark && cell[1][1] == mark && cell[2][1] == mark
+    ||  cell[0][2] == mark && cell[1][2] == mark && cell[2][2] == mark
+    ||  cell[0][0] == mark && cell[1][1] == mark && cell[2][2] == mark
+    ||  cell[2][0] == mark && cell[1][1] == mark && cell[0][2] == mark )
+    {
+        cout << "\n ゲーム終了：" << mark << "の勝ちだよ\n";
+        return true;
+    }
+
+    bool draw = true;
+    for( int v = 0; v < 3 && draw; v++ )
+    {
+        for( int h = 0; h < 3 && draw; h++ )
+        {
+            if( cell[v][h] >= '1' && cell[v][h] <= '9' )
+            {
+                draw = false;
+            }
+        }
+    }
+
+    if( draw )
+    {
+        cout << "\n ゲーム終了：" << "引き分けだよ\n";
+        return true;
+    }
+
+    return false;
+}
