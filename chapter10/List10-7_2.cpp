@@ -156,3 +156,14 @@ bool Board::judge( Player *player )
 
     return false;
 }
+
+Board::Board()
+{
+    for( int v = 0; v < 3; v++ )
+    {
+        for( int h = 0; h < 3; h++ )
+        {
+            cell[v][h] = ( v * 3 + h + 1 ) + '0';
+        }
+    }
+}
