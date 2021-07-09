@@ -167,3 +167,43 @@ Board::Board()
         }
     }
 }
+
+int main()
+{
+    Player *player[2];
+    User user('o');
+    Computer computer('x');
+    player[0] = &computer;
+    player[1] = &user;
+    Board board;
+    int turn = 0;
+
+    srand( time( NULL ) );
+
+    while(true)
+    {
+        board.show();
+        do
+        {
+            player[ turn ]->select();
+        } while ( board.setCell( player[ turn ] ) == false);
+
+        if( board.judge( player[turn]))
+        {
+            break;
+        }
+        
+        if( turn == 0 )
+        {
+            turn = 1;
+        }
+        else
+        {
+            turn = 0;
+        }
+    }
+
+    board.show();
+
+    return 0;
+}
